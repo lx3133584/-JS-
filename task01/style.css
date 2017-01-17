@@ -1,0 +1,37 @@
+*{margin:0;}
+html{
+    font-size:62.5%;
+    font-family:'Hiragino Sans GB','Microsoft Yahei',"WenQuanYi Micro Hei",SimSun,Tahoma,Arial,Helvetica,STHeiti,sans-serif;
+}
+#boxes{
+    margin: 200px auto 0;
+    max-height: 400px;
+    max-width: 400px;
+    height: 400px;
+    line-height: 400px;
+    width: 100%;
+    text-align: center;
+}
+#boxes div{
+    background: #e78326;
+    height:32%;
+    width: 32%;
+    float:left;
+    margin:2px;
+    border-radius:8px;
+}
+.btn{
+    text-align: center;
+}
+.btn button{
+    display: inline-block;
+    margin: 20px 20px;
+    height: 2em;
+    line-height: 2em;
+    font-size: 3rem;
+    color: #fff;
+    background: #e4393c;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
