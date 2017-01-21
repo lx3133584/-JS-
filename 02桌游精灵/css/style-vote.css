@@ -1,0 +1,157 @@
+    /*reset*/
+*{
+    margin:0;
+}
+html{
+    font-size: 62.5%;
+}
+body{
+    background: #29bde0;
+}
+/*end reset*/
+
+    /*header*/
+.header{
+    height: 2.35em;
+    line-height: 2.35em;
+    font-size: 3.4rem;
+    color: #fff;
+    text-align: center;
+}
+.header .fa-bars{
+    float: left;
+    margin: 0.3em 0.5em;
+    font-size: 5rem;
+    vertical-align: middle;
+}
+.header .fa-close{
+    float: right;
+    margin: 0.3em 0.5em;
+    font-size: 5rem;
+    vertical-align: middle;
+}
+/*end header*/
+
+    /*main*/
+        /*talk*/
+.talk{
+    padding: 0 1em;
+    width: 100%;
+    height: 3em;
+    line-height: 3em;
+    font-size: 2.6rem;
+    color: #464646;
+    background: rgba(255,255,255,0.67);
+    overflow: hidden;
+}
+.talk p{
+    display: inline-block;
+}
+.talk div{
+    float: right;
+    margin: 0.2em 1em;
+    width: 1em;
+    height: 1em;
+    line-height: 0.9em;
+    font-size: 5rem;
+    color: #fff;
+    text-align: center;
+    background: #fbb435;
+    border-radius: 50%;
+}
+.talk i{
+    margin-left: 0.1em;
+}
+.main>p{
+    margin: 0 4em 1em 4em;
+    font-size: 2.4rem;
+    color: #fff;
+}
+.main>i{
+    margin: -0.365em 0 -1em 2em;
+    font-size: 5rem;
+    color: #fff;
+    opacity: 0.67;
+}
+    /*end talk*/
+        /*boxes*/
+.boxes{
+    text-align: center;
+    margin-bottom: 20rem;
+}
+.boxes>div{
+    display: inline-block;
+    margin: 0 5%;
+    width: 20%;
+    font-size: 3rem;
+    text-align: center;
+}
+@media screen and (max-width: 796px){
+    .boxes>div{
+        width: 80%;
+    }
+}
+@media screen and (min-width: 1027px){
+    .boxes>div{
+        margin: 0 2%;
+    }
+}
+.box{
+    border: 5px solid #fff;
+}
+.box div:first-child{
+    height: 3em;
+    line-height: 3em;
+    background: #fbb435;
+}
+.box div:last-child{
+    font-size: 2.276rem;
+    color: #fff;
+    background: #1a99b7;
+}
+.operate{
+    margin: 2rem 0;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+}
+.operate:not(.active){
+    visibility: hidden;
+}
+.operate img{
+    margin-right: 16%;
+    padding: 5px;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height:1.5rem;
+    background: #fff;
+}
+.operate img:last-child{
+    margin-right: 0;
+}
+    /*end boxes*/
+/*end main*/
+    /*footer*/
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 5em;
+    line-height: 5em;
+    font-size: 4rem;
+    text-align: center;
+    background: #29bde0;
+}
+.footer a{
+    display: inline-block;
+    width: 80%;
+    height: 3em;
+    line-height: 3em;
+    font-size: 4rem;
+    color: #fff;
+    background: #fbb435;
+    border: 0;
+    text-decoration: none;
+}
+/*end footer*/
+

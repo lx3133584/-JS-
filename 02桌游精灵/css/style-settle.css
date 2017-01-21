@@ -1,0 +1,130 @@
+    /*reset*/
+*{
+    margin:0;
+}
+html{
+    font-size: 62.5%;
+}
+/*end reset*/
+
+    /*header*/
+.header{
+    height: 2.35em;
+    line-height: 2.35em;
+    font-size: 3.4rem;
+    color: #fff;
+    text-align: center;
+    background: #29bde0;
+}
+.header .fa-home{
+    float: left;
+    margin: 0.3em 0.5em;
+    font-size: 5rem;
+    vertical-align: middle;
+}
+.header .fa-info-circle{
+    float: right;
+    margin: 0.3em 0.5em;
+    font-size: 5rem;
+    vertical-align: middle;
+}
+/*end header*/
+    
+    /*main*/
+        /*prize*/
+.prize{
+    padding: 0 12%;
+    background: #29bde0;
+}
+.prize h1{
+    margin: 0 auto;
+    width: 8em;
+    height: 5em;
+    line-height: 7.5em;
+    font-size: 4.8rem;
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+    vertical-align: 10%;
+    background: url("../img/prize.png") no-repeat 0 1px;
+    -webkit-background-size: 101%;
+    background-size: 101%;
+}
+.prize p{
+    font-size: 3.3rem;
+    color: #ffc865;
+}
+    /*end prize*/
+        /*settle*/
+.settle{
+    padding: 3em 12% 1em;
+    font-size: 2.6rem;
+    color: #fff;
+    background: #29bde0;
+}
+.settle p{
+    margin-bottom: 0.2em;
+}
+.settle p:nth-child(2) span{
+    width: 30%;
+    display: inline-block;
+}
+    /*end settle*/
+        /*log*/
+.log div{
+    padding: 1.2rem 12% 3.5rem;
+    border-bottom: 2px solid #ddd;
+    background: #fff;
+}
+.log div:last-child{
+    margin-bottom: 12rem;
+}
+.log h2{
+    margin-bottom: 0.8em;
+    font-size: 3.3rem;
+    font-weight: normal;
+    color: #515151;
+}
+.log p{
+    margin-bottom: 0.2em;
+    font-size: 2.6rem;
+    color: #a6a6a6;
+}
+.log i{
+    float: right;
+    margin-top: .8em;
+    font-size: 2rem;
+    font-style: normal;
+    color: #a6a6a6;
+}
+    /*end log*/
+/*end main*/
+
+    /*footer*/
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 3.225em;
+    font-size: 4rem;
+    text-align: center;
+    background: rgba(41,189,224,.48);
+}
+.footer a{
+    display: inline-block;
+    margin: .5em;
+    width: 42%;
+    height: 2.5em;
+    line-height: 2.5em;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.footer a:first-child{
+    background: #f66f6f;
+}
+.footer a:last-child{
+    background: #fbb435;
+}
+/*end footer*/
+
