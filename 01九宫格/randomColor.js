@@ -11,6 +11,9 @@ var time = null;
 btn1.addEventListener('click',function () {
     time = setInterval(
         function () {
+            for(var m=0;m<9;m++){
+                squares[m].style.background = '#e78326';
+            }
             for(var i=0,n=3;i<n;i++){
                 var randomNum = Math.floor(Math.random()*9);
                 var randomColor = '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).substr(-6);
