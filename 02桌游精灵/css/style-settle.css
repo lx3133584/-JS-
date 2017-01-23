@@ -1,20 +1,29 @@
-    /*reset*/
+/*reset*/
 *{
     margin:0;
 }
-html{
+html,body{
+    height: 100%;
     font-size: 62.5%;
+    background: #29bde0;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+}
+a:visited{
+    color: inherit;
 }
 /*end reset*/
 
-    /*header*/
+/*header*/
 .header{
     height: 2.35em;
     line-height: 2.35em;
     font-size: 3.4rem;
     color: #fff;
-    text-align: center;
     background: #29bde0;
+    text-align: center;
 }
 .header .fa-home{
     float: left;
@@ -27,9 +36,9 @@ html{
     margin: 0.3em 0.5em;
     font-size: 5rem;
     vertical-align: middle;
+    cursor: pointer;
 }
 /*end header*/
-    
     /*main*/
         /*prize*/
 .prize{

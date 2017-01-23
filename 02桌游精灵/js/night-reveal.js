@@ -24,10 +24,10 @@ function init() {
 function kill(num,role) {
     $(".log").append('<p>'+num+'号被杀手杀死了，真实身份是'+role+'</p>')
 }
-function sniper(num,role) {
+function sniper(num,role,day) {
     $(".log").append('<p>'+num+'号被狙击手狙死了，真实身份是'+role+'</p>')
 }
-function prick(num,role) {
+function prick(num,role,day) {
     $(".log").append('<p>'+num+'号被医生毒死了，真实身份是'+role+'</p>')
 }
 

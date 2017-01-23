@@ -2,27 +2,30 @@
  * Created by Liang Xu on 2017/1/21.
  */
 $(function () {
+    clearCookie();
     bindNum();
     customSetting();
     setData();
+    assignRole(6);
 });
-var sum = $(".num input[type='range']").val();
-//设置玩家人数
+var sum = Number($(".num input[type='range']").val());
+
+//设置玩家总人数，自动分配角色
 function bindNum() {
     $(".num input[type='text']").on("keyup",function () {
         sum = Number($(this).val());
         $(".num input[type='range']").val(sum);
-        assignRole();
+        assignRole(sum);
     });
     $(".num input[type='range']").on("change",function () {
         sum = Number($(this).val());
         $(".num input[type='text']").val(sum);
-        assignRole();
+        assignRole(sum);
     });
 }
-//根据玩家人数分配角色
-function assignRole() {
-    switch (Number($(".num input[type='text']").val()))
+//根据玩家总人数分配角色
+function assignRole(sum) {
+    switch (sum)
     {
         case 6:
             $(".role-1").find("span").text("4");
@@ -93,7 +96,7 @@ function assignRole() {
     }
 
 }
-// 玩家自定义设置
+// 玩家自定义分配角色
 function customSetting() {
     var flag = false;
     $(".ratio-right ul li").find("span").after("<input type='text'>");//插入隐藏的输入框
@@ -105,11 +108,14 @@ function customSetting() {
             })
                 .end().find("span").show();
             if($sum>5&&$sum<19){    //判断输入的数字是否符合要求
-                $(".role-1").find("span").text($(".role-1").find("input").val());   //
-                $(".role-2").find("span").text($(".role-2").find("input").val());   //
-                $(".role-3").find("span").text($(".role-3").find("input").val());   //把输入框的值赋给span
-                $(".role-4").find("span").text($(".role-4").find("input").val());   //
-                $(".role-5").find("span").text($(".role-5").find("input").val());   //
+                for(var i=1;i<=5;i++){
+                    if(!$(".role-"+i).find("input").val()){   //判断是否输入数字
+                        $(".role-"+i).find("span").text(0);  //未输入则置为0
+                    }
+                    else {
+                        $(".role-"+i).find("span").text($(".role-"+i).find("input").val()); //把输入框的值赋给span
+                    }
+                }
                 sum = $sum;                                         //改变range的值
                 $(".num input[type='range']").val(sum);
                 $(".num input[type='text']").val(sum);
@@ -147,11 +153,19 @@ function setData() {
             setCookie("role"+i,$(".role-"+i).find("span").text(),3)
         }
         for(var m=1;m<=2;m++){
-            setCookie("word"+i,$(".phrase input:eq("+(m-1)+")").val(),3)
+            setCookie("word"+m,$(".phrase input:eq("+(m-1)+")").val(),3)
         }
         setCookie("sum",sum,3);
         window.location.href = "view-id.html";
     })
+}
+//清除残存cookie
+function clearCookie(){
+    var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
+    if (keys) {
+        for (var i = keys.length; i--;)
+            document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString()
+    }
 }
 
 

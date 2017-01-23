@@ -30,8 +30,13 @@ function clickActive() {
         if($(this).parent().hasClass("activated")){
             alert("该玩家已死亡");
         }else{
-            $(".boxes>div").removeClass("active");
-            $(this).parent().addClass("active");
+            if($(this).parent().hasClass("active")){
+                $(".boxes>div").removeClass("active");
+            }
+            else {
+                $(".boxes>div").removeClass("active");
+                $(this).parent().addClass("active");
+            }
         }
     });
 }
@@ -129,18 +134,20 @@ function sniperStage() {
 function prickStage() {
     $(".header span").text("医生救人");
     $(".talk>p").text("医生请睁眼，请选择要救治的对象");
-    $(".main>p").text("点击下方玩家头像，对玩家进行救治（救治两次该玩家被毒死）");
+    $(".main>p").text("点击下方玩家头像，对玩家进行救治（扎两针空针该玩家被毒死）");
     clickActive();
     $(".footer button").text("确定").on("click",function () {
         var num = $(".boxes>div.active").index();
         if(getCookie("die"+(num+1))=="prick"){
             setCookie("die"+(num+1),"prick2",3);
         }
-        else{
+        else if(getCookie("die"+(num+1))==""){
             setCookie("die"+(num+1),"prick",3);
         }
+        else {
+            setCookie("die"+(num+1),"",3);
+        }
         setCookie("stage",5,3);
-        var sum = getCookie("sum");
         judgeEnd();
         window.location.href = "judge-log.html";
     })
@@ -149,23 +156,18 @@ function prickStage() {
 function voteStage() {
     $(".header span").text("投票");
     $(".talk>p").text("发言讨论结束，大家请投票");
-    $(".main>p").text("点击得票数最多人的头像");
+    $(".main>p").text("点击得票数最多人的头像(相同票数则不死人)");
     clickActive();
     $(".footer button").text("投死").on("click",function () {
         var num = $(".boxes>div.active").index();
-        if(num!=-1){
-            setCookie("die"+(num+1),"vote",3);
-            setCookie("stage",8,3);
-            judgeEnd();
-            window.location.href = "judge-log.html";
-        }
-        else{
-            alert("请点击玩家头像，对玩家进行标记")
-        }
+        setCookie("die"+(num+1),"vote",3);
+        setCookie("stage",8,3);
+        judgeEnd();
+        window.location.href = "judge-log.html";
     })
 }
 //判断是否游戏结束
-function judgeEnd() {
+function judgeEnd(){
     var sum = Number(getCookie("sum"));
     var sum_die = 0;
     var num_bandit = 0;
@@ -185,14 +187,13 @@ function judgeEnd() {
     }
     var num_bandit_alive = num_bandit-num_bandit_die;
     var sum_alive = sum-sum_die;
-    var num_police = sum-num_bandit;
     var num_police_alive = sum_alive-num_bandit_alive;
-    if(num_bandit_alive>num_police_alive){
-        setCookie("settle","杀手",3);
+    if(num_bandit_alive>=num_police_alive){
+        setCookie("settle","杀手胜利",3);
         window.location.href = "settle.html";
     }
     else if(num_bandit_alive==0){
-        setCookie("settle","平民",3);
+        setCookie("settle","平民胜利",3);
         window.location.href = "settle.html";
     }
     else {
