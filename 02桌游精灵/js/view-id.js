@@ -13,7 +13,7 @@ var role = ["平民","警察","杀手","医生","狙击手"];
 var id = [];
 //处理参数，随机分配角色
 function dataProcessing() {
-    for(var m=0;m<4;m++){
+    for(var m=0;m<5;m++){
         if(getCookie("role"+(m+1))!=0){
             for(var n=0;n<getCookie("role"+(m+1));n++){
                 id.push(role[m]);
