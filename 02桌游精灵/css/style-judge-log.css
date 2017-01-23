@@ -1,0 +1,137 @@
+/*reset*/
+*{
+    margin:0;
+}
+html,body{
+    height: 100%;
+    font-size: 62.5%;
+    background: #f0f0f0;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+a:visited{
+    color: inherit;
+}
+/*end reset*/
+
+/*header*/
+.header{
+    height: 2.35em;
+    line-height: 2.35em;
+    font-size: 3.4rem;
+    color: #fff;
+    text-align: center;
+    background: #29bde0;
+}
+.header .fa-angle-left{
+    float: left;
+    margin: 0.3em 0.5em;
+    font-size: 5rem;
+    vertical-align: middle;
+}
+.header .fa-close{
+    float: right;
+    margin: 0.3em 0.5em;
+    font-size: 5rem;
+    vertical-align: middle;
+}
+/*end header*/
+
+/*main*/
+.main{
+    margin: 1em auto 3em;
+    width: 96%;
+    font-size: 3rem;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #c9c9c9;
+}
+.main h2{
+    height: 3em;
+    line-height: 3em;
+    color: #29bde0;
+    letter-spacing: 0.2em;
+    border-bottom: solid 1px #c9c9c9;
+}
+.main>div{
+    margin-left: 3em;
+    padding: 1em 0;
+    border-left: solid 2px #c9c9c9;
+}
+.main>div>span{
+    float: left;
+    display: inline-block;
+    margin-left: -0.9em;
+    margin-top: 0.2em;
+    width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    font-size: 2em;
+    color: #fdbc48;
+    background: #fff;
+    border: solid 2px #c9c9c9;
+    border-radius: 50%;
+}
+.main ul{
+    list-style: none;
+}
+.main li{
+    position: relative;
+    margin: 1em 2em 1em 4em;
+    height: 3em;
+    line-height: 3em;
+    color: #fff;
+    background: #24a7c6;
+}
+.main li:before{
+    content:"";
+    position: absolute;
+    right: 100%;
+    top: 0.75em;
+    width: 0;
+    height: 0;
+    border-top: 0.75em solid transparent;
+    border-right: 1em solid #24a7c6;
+    border-bottom: 0.75em solid transparent;
+}
+.main li.active{
+    background: #fdbc48;
+    cursor: pointer;
+}
+.main li.active:before{
+    border-right: 1em solid #fdbc48;
+}
+.night li{
+    display: none;
+}
+.day{
+    padding-bottom: 5em!important;
+}
+/*end main*/
+
+/*footer*/
+.footer{
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    width: 100%;
+    height: 5em;
+    line-height: 5em;
+    font-size: 4rem;
+    text-align: center;
+}
+.footer button{
+    display: inline-block;
+    width: 80%;
+    height: 3em;
+    line-height: 3em;
+    font-size: 4rem;
+    color: #fff;
+    background: #fbb435;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*end footer*/

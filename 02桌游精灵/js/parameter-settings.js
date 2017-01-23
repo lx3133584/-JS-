@@ -4,9 +4,9 @@
 $(function () {
     bindNum();
     customSetting();
-    post();
+    setData();
 });
-var sum = 0;
+var sum = $(".num input[type='range']").val();
 //设置玩家人数
 function bindNum() {
     $(".num input[type='text']").on("keyup",function () {
@@ -139,18 +139,19 @@ function customSetting() {
         }
     })
 }
-//跨页面传参
-function post() {
-    $(".btn-parameter-settings").on("click",function () {
-        var url = "view-id.html?role-1="+$(".role-1").find("span").text()
-            +"&role-2="+$(".role-2").find("span").text()
-            +"&role-3="+$(".role-3").find("span").text()
-            +"&role-4="+$(".role-4").find("span").text()
-            +"&role-5="+$(".role-5").find("span").text()
-            +"&word-1="+$(".phrase input:first-child").val()
-            +"&word-2="+$(".phrase input:last-child").val();
-        window.location.href=url;
-    });
+
+//通过cookie储存参数
+function setData() {
+    $(".btn-parameter-settings").on("click",function (){
+        for(var i=1;i<=5;i++){
+            setCookie("role"+i,$(".role-"+i).find("span").text(),3)
+        }
+        for(var m=1;m<=2;m++){
+            setCookie("word"+i,$(".phrase input:eq("+(m-1)+")").val(),3)
+        }
+        setCookie("sum",sum,3);
+        window.location.href = "view-id.html";
+    })
 }
 
 
