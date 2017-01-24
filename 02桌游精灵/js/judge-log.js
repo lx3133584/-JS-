@@ -16,18 +16,13 @@ for(var m=0;m<5;m++){
     roles_alive.push(Number(getCookie("roles_alive").split(",")[m]))
 }
 
-//初始化
+//初始化角色条目
 function init() {
     $(".main h2 span").text(day);
-    for(var i=1;i-1<sum;i++){
-        switch (0){
-            case roles_alive[2]:$(".night ul li:eq(0)").hide();
-            case roles_alive[1]:$(".night ul li:eq(1)").hide();
-            case roles_alive[4]:$(".night ul li:eq(2)").hide();
-            case roles_alive[3]:$(".night ul li:eq(3)").hide();
-        }
-    }
-
+    if(roles_alive[2]==0){$(".night ul li:eq(0)").hide();}
+    if(roles_alive[1]==0){$(".night ul li:eq(1)").hide();}
+    if(roles_alive[4]==0){$(".night ul li:eq(2)").hide();}
+    if(roles_alive[3]==0){$(".night ul li:eq(3)").hide();}
 }
 //判断阶段
 function judgeStage() {

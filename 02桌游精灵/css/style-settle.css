@@ -42,6 +42,7 @@ a:visited{
     /*main*/
         /*prize*/
 .prize{
+    margin: 5rem;
     padding: 0 12%;
     background: #29bde0;
 }
@@ -60,23 +61,34 @@ a:visited{
     background-size: 101%;
 }
 .prize p{
+    margin-top: 5rem;
     font-size: 3.3rem;
     color: #ffc865;
 }
     /*end prize*/
         /*settle*/
 .settle{
-    padding: 3em 12% 1em;
+    padding: 1em 12%;
     font-size: 2.6rem;
     color: #fff;
     background: #29bde0;
 }
 .settle p{
+    margin-bottom: 0.8em;
+}
+.settle p span{
     margin-bottom: 0.2em;
 }
 .settle p:nth-child(2) span{
     width: 30%;
     display: inline-block;
+}
+.settle p:last-child span{
+    width: 100%;
+    display: inline-block;
+}
+.settle p>span>span{
+    text-align: center;
 }
     /*end settle*/
         /*log*/
@@ -136,4 +148,39 @@ a:visited{
     background: #fbb435;
 }
 /*end footer*/
+/*分享*/
+.bshare-custom{
+    margin-bottom: 3.225em!important;
+    text-indent: 2em!important;
+    font-size: 4rem!important;
+    color: #fff!important;
+}
+/*媒体查询*/
+@media screen and (max-width: 776px){
+    html,body{
+        font-size: 50%;
+    }
+    .prize{
+        padding: 0 5%;
+    }
+}
+@media screen and (max-width: 627px){
+    html,body{
+        font-size: 45%;
+    }
+}
+@media screen and (max-width: 530px){
+    html,body{
+        font-size: 40%;
+    }
+}
+
+@media screen and (max-width: 480px){
+    html,body{
+        font-size: 35%;
+    }
+    .prize{
+        padding: 0;
+    }
+}
 
