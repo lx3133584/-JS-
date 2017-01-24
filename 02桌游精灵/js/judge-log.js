@@ -8,7 +8,7 @@ $(function () {
 
 var sum = Number(getCookie("sum"));
 var id = [];
-var stage = getCookie("stage");
+var stage = Number(getCookie("stage"));
 var day = Number(getCookie("day"));
 
 //初始化
@@ -28,14 +28,14 @@ function init() {
 //判断阶段
 function judgeStage() {
     switch(stage){
-        case "1":readyStage();break;
-        case "2":nightStage();break;
-        case "3":nightStage();break;
-        case "4":nightStage();break;
-        case "5":dayStage();break;
-        case "6":dayStage();break;
-        case "7":dayStage();break;
-        case "8":dayStage();break;
+        case 1:readyStage();break;
+        case 2:nightStage();break;
+        case 3:nightStage();break;
+        case 4:nightStage();break;
+        case 5:nightReveal();break;
+        case 6:discussStage();break;
+        case 7:voteStage();break;
+        case 8:dayOver();break;
 
     }
 }
@@ -57,36 +57,54 @@ function nightStage() {
         window.location.href = "vote.html";
     });
 }
-//天亮阶段
-function dayStage() {
+//白天阶段
+//黑夜解密阶段
+function nightReveal() {
     $(".main li").removeClass("active");
     $(".day li:eq("+(stage-5)+")").addClass("active");
-    if(stage=='5'){
-        $(".footer button").text("天亮请睁眼");
-        $(".main ul li.active,.footer button").on("click",function () {
-            window.location.href = "night-reveal.html";
-        });
-    }
-    else if(stage=='6'){
-        $(".footer button").text("讨论完成");
-        $(".main ul li.active,.footer button").on("click",function () {
-            setCookie("stage",7,3);
-            window.location.reload();
-        });
-    }
-    else if(stage=='7'){
-        $(".footer button").text("进行投票");
-        $(".main ul li.active,.footer button").on("click",function () {
-            window.location.href = "vote.html";
-        });
-    }
-    else if(stage=='8'){
-        $(".footer button").text("第"+(day+1)+"天");
-        $(".main ul li.active,.footer button").on("click",function () {
-            setCookie("day",(day+1),3);
-            setCookie("stage",1,3);
-            window.location.reload();
-        });
-    }
+    $(".footer button").text("天亮请睁眼");
+    $(".main ul li.active,.footer button").on("click",function () {
+        for(var n=1;n-1<sum;n++){        //结算时给死亡玩家(未确认死亡：没有死亡日期)加上死亡日期，确认死亡
+            if(getCookie("die"+n)&&getCookie("die"+n)!="prick"&&getCookie("die"+n).indexOf("#")==-1){
+                setCookie("die"+n,getCookie("die"+n)+"#"+day,3)
+            }
+        }
+        window.location.href = "night-reveal.html";
+    });
+}
+//讨论阶段
+function discussStage() {
+    $(".main li").removeClass("active");
+    $(".day li:eq("+(stage-5)+")").addClass("active");
+    $(".footer button").text("讨论完成");
+    $(".main ul li.active,.footer button").on("click",function () {
+        setCookie("stage",7,3);
+        window.location.reload();
+    });
+}
+//投票阶段
+function voteStage() {
+    $(".main li").removeClass("active");
+    $(".day li:eq("+(stage-5)+")").addClass("active");
+    $(".footer button").text("进行投票");
+    $(".main ul li.active,.footer button").on("click",function () {
+        window.location.href = "vote.html";
+    });
+}
+//结束阶段
+function dayOver() {
+    $(".main li").removeClass("active");
+    $(".day li:eq("+(stage-5)+")").addClass("active");
+    $(".footer button").text("第"+(day+1)+"天");
+    $(".main ul li.active,.footer button").on("click",function () {
+        for(var n=1;n-1<sum;n++){        //结算时给死亡玩家(未确认死亡：没有死亡日期)加上死亡日期，确认死亡
+            if(getCookie("die"+n)&&getCookie("die"+n)!="prick"&&getCookie("die"+n).indexOf("#")==-1){
+                setCookie("die"+n,getCookie("die"+n)+"#"+day,3)
+            }
+        }
+        setCookie("day",(day+1),3);
+        setCookie("stage",1,3);
+        window.location.reload();
+    });
 }
 

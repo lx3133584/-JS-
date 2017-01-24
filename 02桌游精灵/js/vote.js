@@ -6,9 +6,10 @@ $(function () {
     judgeStage();
 });
 
+var sum = Number(getCookie("sum"));
+
 //初始化角色
 function init() {
-   var sum = getCookie("sum");
    var id = [];
    for(var i=0;i<sum;i++){
        id.push(getCookie("num"+(i+1)));
@@ -16,7 +17,13 @@ function init() {
        $(".box:eq("+i+") div:first-child").text(id[i]);
        $(".box:eq("+i+") div:last-child").text(i+1+"号");
    }
+    for(var n=0;n<sum;n++){         //如果玩家死亡则加上黑框
+        if(getCookie("die"+(n+1)).indexOf("#")!=-1){
+            $(".boxes>div:eq("+n+")").addClass("activated");
+        }
+    }
 }
+
 //查看身份
 function view() {
         $(".box").on("mouseenter click",function () {
@@ -24,6 +31,7 @@ function view() {
             $(this).find("img").hide();
         })
 }
+
 //点击box激活红色边框
 function clickActive() {
     $(".box").on("click",function () {
@@ -41,6 +49,7 @@ function clickActive() {
     });
 }
 
+
 //判断阶段
 function judgeStage() {
     switch(getCookie("stage")){
@@ -55,6 +64,7 @@ function judgeStage() {
 
     }
 }
+
 //准备阶段
 function readyStage() {
     view();
@@ -68,6 +78,7 @@ function readyStage() {
             window.location.href = "judge-log.html";
         });
 }
+
 //杀手杀人阶段
 function killStage() {
     $(".header span").text("杀手杀人");
@@ -80,13 +91,13 @@ function killStage() {
             setCookie("die"+(num+1),"kill",3);
             setCookie("stage",2,3);
             judgeEnd();
-            window.location.href = "judge-log.html";
         }
         else{
             alert("请点击玩家头像，对玩家进行标记")
         }
     })
 }
+
 //警察验人阶段
 function verifyStage() {
     var flag = false;
@@ -127,9 +138,9 @@ function sniperStage() {
         setCookie("die"+(num+1),"sniper",3);
         setCookie("stage",4,3);
         judgeEnd();
-        window.location.href = "judge-log.html";
     })
 }
+
 //医生扎人阶段
 function prickStage() {
     $(".header span").text("医生救人");
@@ -149,9 +160,9 @@ function prickStage() {
         }
         setCookie("stage",5,3);
         judgeEnd();
-        window.location.href = "judge-log.html";
     })
 }
+
 //投票阶段
 function voteStage() {
     $(".header span").text("投票");
@@ -163,12 +174,12 @@ function voteStage() {
         setCookie("die"+(num+1),"vote",3);
         setCookie("stage",8,3);
         judgeEnd();
-        window.location.href = "judge-log.html";
     })
 }
+
+
 //判断是否游戏结束
 function judgeEnd(){
-    var sum = Number(getCookie("sum"));
     var sum_die = 0;
     var num_bandit = 0;
     var num_bandit_die = 0;
@@ -188,7 +199,7 @@ function judgeEnd(){
     var num_bandit_alive = num_bandit-num_bandit_die;
     var sum_alive = sum-sum_die;
     var num_police_alive = sum_alive-num_bandit_alive;
-    if(num_bandit_alive>=num_police_alive){
+    if(num_police_alive<=num_bandit_alive){
         setCookie("settle","杀手胜利",3);
         window.location.href = "settle.html";
     }
@@ -197,10 +208,6 @@ function judgeEnd(){
         window.location.href = "settle.html";
     }
     else {
-        for(var n=0;n<sum;n++){         //如果玩家死亡则加上黑框
-            if(getCookie("die"+(n+1))&&getCookie("die"+(n+1))!="prick"){
-                $(".boxes>div:eq("+n+")").addClass("activated");
-            }
-        }
+        window.location.href = "judge-log.html";
     }
 }
