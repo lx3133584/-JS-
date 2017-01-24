@@ -160,17 +160,31 @@ function judgeEnd(){
     var num_bandit_alive = roles_alive[2];
     var num_police_alive = roles_alive[0]+roles_alive[1]+roles_alive[3]+roles_alive[4];
     if(num_bandit_alive==0){
+        var date1 = new Date();   //计算结束游戏的时间
+        var time1 = date1.getTime();
+        setCookie("time",getCookie("time")+","+time1,3);
         setCookie("settle","平民胜利",3);
         window.location.href = "settle.html";
     }
     else if(num_police_alive<=num_bandit_alive){
+        var date2 = new Date();   //计算结束游戏的时间
+        var time2 = date2.getTime();
+        setCookie("time",getCookie("time")+","+time2,3);
         setCookie("settle","杀手胜利",3);
         window.location.href = "settle.html";
     }
     else {
         switch (stage){
-            case 5:window.location.href = "night-reveal.html";break;
-            case 8:setCookie("stage",1,3);window.location.reload();break;
+            case 5:
+                window.location.href = "night-reveal.html";
+                break;
+            case 8:
+                var date = new Date();   //计算每天用时
+                var time = date.getTime();
+                setCookie("time",getCookie("time")+","+time,3);
+                setCookie("stage",1,3);
+                window.location.reload();
+                break;
         }
     }
 }

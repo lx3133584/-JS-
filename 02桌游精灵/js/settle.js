@@ -15,6 +15,7 @@ function init() {
     var sum = getCookie("sum");
     var word1 = getCookie("word1");
     var word2 = getCookie("word2");
+    var time = getCookie("time").split(",");
 
     if(settle=="杀手胜利"){
         $(".prize").find("h1").text(settle)
@@ -34,10 +35,17 @@ function init() {
     //词组
     $(".settle>p:eq(2)>span:eq(0)").text("水民词组："+word1);
     $(".settle>p:eq(2)>span:eq(1)").text("幽灵词组："+word1);
-    //日志
-    for(var n=0;n<day;n++){
-        $(".log").append("<div><i>0小时07分</i><h2>第"+(n+1)+"天</h2></div>")
+    //时间
+    for(var p=0;p<time.length;p++){
+        time[p] = Number(time[p]);
     }
+    var sum_time = timeFormat(0,time.length-1);
+    $(".settle>p:first-child>span").text(sum_time.hour+"小时"+sum_time.minutes+"分");
+    for(var n=0;n<day;n++){
+        var my_time = timeFormat(n,n+1);
+        $(".log").append("<div><i>"+my_time.hour+"小时"+my_time.minutes+"分</i><h2>第"+(n+1)+"天</h2></div>")
+    }
+    //日志内容
     var die_day = null;
     for(var m=0;m<sum;m++){
         if(die[m].indexOf("#")!=-1){
@@ -78,4 +86,13 @@ function prick(num,role,day) {
 }
 function vote(num,role,day) {
     $(".log>div:eq("+(day-1)+")").append('<p>白天：'+(num+1)+'号被全民投票投死了，真实身份是'+role+'</p>')
+}
+
+//时间格式化
+function timeFormat(start,end) {
+    return {
+        time:time[end]-time[start],
+        hour:Math.floor(my_time/(1000*60*60)),
+        minutes:Math.floor((my_time-my_hour*60*60*1000)/(1000*60))
+    };
 }

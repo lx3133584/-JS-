@@ -149,6 +149,9 @@ function customSetting() {
 //通过cookie储存参数
 function setData() {
     $(".btn-parameter-settings").on("click",function (){
+        var date = new Date();//设定开始时间
+        var time = date.getTime();
+        setCookie("time",time,3);
         var roles = [];
         for(var i=1;i<=5;i++){
             roles.push($(".role-"+i).find("span").text());
