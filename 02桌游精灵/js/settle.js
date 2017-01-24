@@ -5,18 +5,22 @@ $(function () {
     init();
 });
 
-//通过cookie获取数据并加载页面
-function init() {
-    var settle = getCookie("settle");
-    var day = getCookie("day");
-    var roles = getCookie("roles").split(",");
-    var id = getCookie("id").split(",");
-    var die = getCookie("die").split(",");
-    var sum = getCookie("sum");
-    var word1 = getCookie("word1");
-    var word2 = getCookie("word2");
-    var time = getCookie("time").split(",");
+//获取数据
+var settle = getCookie("settle");
+var day = getCookie("day");
+var roles = getCookie("roles").split(",");
+var id = getCookie("id").split(",");
+var die = getCookie("die").split(",");
+var sum = getCookie("sum");
+var word1 = getCookie("word1");
+var word2 = getCookie("word2");
+var time = getCookie("time").split(",");
+for(var p=0;p<time.length;p++){
+    time[p] = Number(time[p]);
+}
 
+//加载页面
+function init() {
     if(settle=="杀手胜利"){
         $(".prize").find("h1").text(settle)
             .end().find("p").text("太棒了!你知道么？在杀人游戏中只有20%的杀手取得游戏最终的胜利哦！");
@@ -25,7 +29,7 @@ function init() {
         $(".prize").find("h1").text(settle)
             .end().find("p").text(
                 "本轮游戏共抓出杀手"+roles[2]+"人，" +
-                "共经历了"+day+"个白天，" +
+                "共经历了"+day+"天，" +
                 "在杀人游戏中击败了"+Math.ceil(roles[2]/sum*100)+"%的玩家！");
     }
     //角色数量
@@ -34,11 +38,8 @@ function init() {
     }
     //词组
     $(".settle>p:eq(2)>span:eq(0)").text("水民词组："+word1);
-    $(".settle>p:eq(2)>span:eq(1)").text("幽灵词组："+word1);
+    $(".settle>p:eq(2)>span:eq(1)").text("幽灵词组："+word2);
     //时间
-    for(var p=0;p<time.length;p++){
-        time[p] = Number(time[p]);
-    }
     var sum_time = timeFormat(0,time.length-1);
     $(".settle>p:first-child>span").text(sum_time.hour+"小时"+sum_time.minutes+"分");
     for(var n=0;n<day;n++){
@@ -90,9 +91,11 @@ function vote(num,role,day) {
 
 //时间格式化
 function timeFormat(start,end) {
+    var o_time = time[end]-time[start];
+    var o_hour = Math.floor(o_time/(1000*60*60));
+    var o_minutes = Math.floor((o_time-o_hour*60*60*1000)/(1000*60));
     return {
-        time:time[end]-time[start],
-        hour:Math.floor(my_time/(1000*60*60)),
-        minutes:Math.floor((my_time-my_hour*60*60*1000)/(1000*60))
+        hour:o_hour,
+        minutes:o_minutes
     };
 }
