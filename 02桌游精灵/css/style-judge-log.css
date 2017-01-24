@@ -103,9 +103,7 @@ a:visited{
 .main li.active:before{
     border-right: 1em solid #fdbc48;
 }
-.night li{
-    display: none;
-}
+
 .day{
     padding-bottom: 5em!important;
 }
