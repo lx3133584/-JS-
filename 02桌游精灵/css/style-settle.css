@@ -79,7 +79,7 @@ a:visited{
 .settle p span{
     margin-bottom: 0.2em;
 }
-.settle p:nth-child(2) span{
+.settle p:nth-child(2)>span{
     width: 30%;
     display: inline-block;
 }
