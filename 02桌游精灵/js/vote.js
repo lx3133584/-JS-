@@ -90,7 +90,7 @@ function killStage() {
         if(num!=-1){
             setCookie("die"+(num+1),"kill",3);
             setCookie("stage",2,3);
-            judgeEnd();
+            window.location.href = "judge-log.html";
         }
         else{
             alert("请点击玩家头像，对玩家进行标记")
@@ -137,7 +137,7 @@ function sniperStage() {
         var num = $(".boxes>div.active").index();
         setCookie("die"+(num+1),"sniper",3);
         setCookie("stage",4,3);
-        judgeEnd();
+        window.location.href = "judge-log.html";
     })
 }
 
@@ -159,7 +159,7 @@ function prickStage() {
             setCookie("die"+(num+1),"",3);
         }
         setCookie("stage",5,3);
-        judgeEnd();
+        window.location.href = "judge-log.html";
     })
 }
 
@@ -173,41 +173,9 @@ function voteStage() {
         var num = $(".boxes>div.active").index();
         setCookie("die"+(num+1),"vote",3);
         setCookie("stage",8,3);
-        judgeEnd();
+        window.location.href = "judge-log.html";
     })
 }
 
 
-//判断是否游戏结束
-function judgeEnd(){
-    var sum_die = 0;
-    var num_bandit = 0;
-    var num_bandit_die = 0;
-    for(var i=1;i<=sum;i++){
-        if(getCookie("num"+i)=="杀手"){
-            num_bandit++;
-            if(getCookie("die"+i)&&getCookie("die"+i)!="prick"){
-                num_bandit_die++;
-            }
-        }
-    }
-    for(var m=1;m<=sum;m++) {
-        if (getCookie("die" + i) && getCookie("die" + i) != "prick") {
-            sum_die++;
-        }
-    }
-    var num_bandit_alive = num_bandit-num_bandit_die;
-    var sum_alive = sum-sum_die;
-    var num_police_alive = sum_alive-num_bandit_alive;
-    if(num_police_alive<=num_bandit_alive){
-        setCookie("settle","杀手胜利",3);
-        window.location.href = "settle.html";
-    }
-    else if(num_bandit_alive==0){
-        setCookie("settle","平民胜利",3);
-        window.location.href = "settle.html";
-    }
-    else {
-        window.location.href = "judge-log.html";
-    }
-}
+

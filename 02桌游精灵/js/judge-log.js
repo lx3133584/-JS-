@@ -108,7 +108,7 @@ function nightReveal() {
                 cancelRoleStage(n);         //死亡角色数减一
             }
         }
-        window.location.href = "night-reveal.html";
+        judgeEnd();
     });
 }
 //讨论阶段
@@ -143,8 +143,27 @@ function dayOver() {
             }
         }
         setCookie("day",(day+1),3);
-        setCookie("stage",1,3);
-        window.location.reload();
+        judgeEnd();
     });
 }
 
+//判断是否游戏结束
+function judgeEnd(){
+    var num_bandit_alive = Number(getCookie("role3"));
+    var num_police_alive = Number(getCookie("role1"))+Number(getCookie("role2"))+Number(getCookie("role4"))+Number(getCookie("role5"));
+    alert("杀手存活人数："+num_bandit_alive+"\n"+"好人存活人数："+num_police_alive);
+    if(num_police_alive<=num_bandit_alive){
+        setCookie("settle","杀手胜利",3);
+        window.location.href = "settle.html";
+    }
+    else if(num_bandit_alive==0){
+        setCookie("settle","平民胜利",3);
+        window.location.href = "settle.html";
+    }
+    else {
+        switch (stage){
+            case 5:window.location.href = "night-reveal.html";break;
+            case 8:setCookie("stage",1,3);window.location.reload();break;
+        }
+    }
+}
