@@ -149,9 +149,12 @@ function customSetting() {
 //通过cookie储存参数
 function setData() {
     $(".btn-parameter-settings").on("click",function (){
+        var roles = [];
         for(var i=1;i<=5;i++){
-            setCookie("role"+i,$(".role-"+i).find("span").text(),3)
+            roles.push($(".role-"+i).find("span").text());
         }
+        setCookie("roles",roles.join(","),3);
+        setCookie("roles_alive",roles.join(","),3);
         for(var m=1;m<=2;m++){
             setCookie("word"+m,$(".phrase input:eq("+(m-1)+")").val(),3)
         }

@@ -5,20 +5,21 @@ $(function () {
     init();
     judgeStage();
 });
-
+//获取参数
 var sum = Number(getCookie("sum"));
+var stage = Number(getCookie("stage"));
+var id = getCookie("id").split(",");
+var die = getCookie("die").split(",");
 
 //初始化角色
 function init() {
-   var id = [];
    for(var i=0;i<sum;i++){
-       id.push(getCookie("num"+(i+1)));
        $(".boxes").append('<div><div class="box"><div>警察</div><img src="img/Vines.jpg" alt="身份牌"><div>2号</div></div><div class="operate"><img src="img/knife.png"/><img src="img/magnifier.png"/><img src="img/sight.png"/><img src="img/cross.png"/></div></div>')
        $(".box:eq("+i+") div:first-child").text(id[i]);
        $(".box:eq("+i+") div:last-child").text(i+1+"号");
    }
     for(var n=0;n<sum;n++){         //如果玩家死亡则加上黑框
-        if(getCookie("die"+(n+1)).indexOf("#")!=-1){
+        if(die[n].indexOf("#")!=-1){
             $(".boxes>div:eq("+n+")").addClass("activated");
         }
     }
@@ -52,13 +53,13 @@ function clickActive() {
 
 //判断阶段
 function judgeStage() {
-    switch(getCookie("stage")){
-        case "0":readyStage();break;
-        case "1":killStage();break;
-        case "2":verifyStage();break;
-        case "3":sniperStage();break;
-        case "4":prickStage();break;
-        case "7":voteStage();break;
+    switch(stage){
+        case 0:readyStage();break;
+        case 1:killStage();break;
+        case 2:verifyStage();break;
+        case 3:sniperStage();break;
+        case 4:prickStage();break;
+        case 7:voteStage();break;
 
         
 
@@ -88,7 +89,8 @@ function killStage() {
     $(".footer button").text("确定").on("click",function () {
         var num = $(".boxes>div.active").index();
         if(num!=-1){
-            setCookie("die"+(num+1),"kill",3);
+            die[num] = "kill";
+            setCookie("die",die.join(","),3);
             setCookie("stage",2,3);
             window.location.href = "judge-log.html";
         }
@@ -135,7 +137,8 @@ function sniperStage() {
     clickActive();
     $(".footer button").text("确定").on("click",function () {
         var num = $(".boxes>div.active").index();
-        setCookie("die"+(num+1),"sniper",3);
+        die[num] = "sniper";
+        setCookie("die",die.join(","),3);
         setCookie("stage",4,3);
         window.location.href = "judge-log.html";
     })
@@ -149,14 +152,17 @@ function prickStage() {
     clickActive();
     $(".footer button").text("确定").on("click",function () {
         var num = $(".boxes>div.active").index();
-        if(getCookie("die"+(num+1))=="prick"){
-            setCookie("die"+(num+1),"prick2",3);
+        if(die[num]=="prick"){
+            die[num] = "prick2";
+            setCookie("die",die.join(","),3);
         }
-        else if(getCookie("die"+(num+1))==""){
-            setCookie("die"+(num+1),"prick",3);
+        else if(die[num]=="false"){
+            die[num] = "prick";
+            setCookie("die",die.join(","),3);
         }
         else {
-            setCookie("die"+(num+1),"",3);
+            die[num] = "false";
+            setCookie("die",die.join(","),3);
         }
         setCookie("stage",5,3);
         window.location.href = "judge-log.html";
@@ -171,7 +177,8 @@ function voteStage() {
     clickActive();
     $(".footer button").text("投死").on("click",function () {
         var num = $(".boxes>div.active").index();
-        setCookie("die"+(num+1),"vote",3);
+        die[num] = "vote";
+        setCookie("die",die.join(","),3);
         setCookie("stage",8,3);
         window.location.href = "judge-log.html";
     })

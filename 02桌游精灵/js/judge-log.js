@@ -9,16 +9,22 @@ $(function () {
 var sum = Number(getCookie("sum"));
 var stage = Number(getCookie("stage"));
 var day = Number(getCookie("day"));
+var die = getCookie("die").split(",");
+var id = getCookie("id").split(",");
+var roles_alive = [];
+for(var m=0;m<5;m++){
+    roles_alive.push(Number(getCookie("roles_alive").split(",")[m]))
+}
 
 //初始化
 function init() {
     $(".main h2 span").text(day);
     for(var i=1;i-1<sum;i++){
-        switch ('0'){
-            case getCookie("role3"):$(".night ul li:eq(0)").hide();
-            case getCookie("role2"):$(".night ul li:eq(1)").hide();
-            case getCookie("role5"):$(".night ul li:eq(2)").hide();
-            case getCookie("role4"):$(".night ul li:eq(3)").hide();
+        switch (0){
+            case roles_alive[2]:$(".night ul li:eq(0)").hide();
+            case roles_alive[1]:$(".night ul li:eq(1)").hide();
+            case roles_alive[4]:$(".night ul li:eq(2)").hide();
+            case roles_alive[3]:$(".night ul li:eq(3)").hide();
         }
     }
 
@@ -27,25 +33,25 @@ function init() {
 function judgeStage() {
     switch(stage){
         case 1:readyStage();
-            if(getCookie("role3")=="0"){
+            if(roles_alive[2]==0){
                 setCookie("stage",stage+1,3);
                 location.reload();
             }
             break;
         case 2:nightStage();
-            if(getCookie("role2")=="0"){
+            if(roles_alive[1]==0){
                 setCookie("stage",stage+1,3);
                 location.reload();
             }
             break;
         case 3:nightStage();
-            if(getCookie("role5")=="0"){
+            if(roles_alive[4]==0){
                 setCookie("stage",stage+1,3);
                 location.reload();
             }
             break;
         case 4:nightStage();
-            if(getCookie("role4")=="0"){
+            if(roles_alive[3]==0){
                 setCookie("stage",stage+1,3);
                 location.reload();
             }
@@ -59,21 +65,26 @@ function judgeStage() {
 }
 //角色死亡则角色数减一
 function cancelRoleStage(num) {
-    switch (getCookie("num"+num)){
+    switch (id[num]){
         case "平民":
-            setCookie("role1",getCookie("role1")-1,3);
-            break;
-        case "杀手":
-            setCookie("role3",getCookie("role3")-1,3);
+            roles_alive[0]--;
+            setCookie("roles_alive",roles_alive.join(","),3);
             break;
         case "警察":
-            setCookie("role2",getCookie("role2")-1,3);
+            roles_alive[1]--;
+            setCookie("roles_alive",roles_alive.join(","),3);
             break;
-        case "狙击手":
-            setCookie("role5",getCookie("role5")-1,3);
+        case "杀手":
+            roles_alive[2]--;
+            setCookie("roles_alive",roles_alive.join(","),3);
             break;
         case "医生":
-            setCookie("role4",getCookie("role4")-1,3);
+            roles_alive[3]--;
+            setCookie("roles_alive",roles_alive.join(","),3);
+            break;
+        case "狙击手":
+            roles_alive[4]--;
+            setCookie("roles_alive",roles_alive.join(","),3);
             break;
     }
 }
@@ -102,9 +113,10 @@ function nightReveal() {
     $(".day li:eq("+(stage-5)+")").addClass("active");
     $(".footer button").text("天亮请睁眼");
     $(".main ul li.active,.footer button").on("click",function () {
-        for(var n=1;n-1<sum;n++){        //结算时给死亡玩家(未确认死亡：没有死亡日期)加上死亡日期，确认死亡
-            if(getCookie("die"+n)&&getCookie("die"+n)!="prick"&&getCookie("die"+n).indexOf("#")==-1){
-                setCookie("die"+n,getCookie("die"+n)+"#"+day,3);
+        for(var n=0;n<sum;n++){        //结算时给死亡玩家(未确认死亡：没有死亡日期)加上死亡日期，确认死亡
+            if(die[n]!="false"&&die[n]!="prick"&&die[n].indexOf("#")==-1){
+                die[n] = die[n]+"#"+day;
+                setCookie("die",die.join(","),3);
                 cancelRoleStage(n);         //死亡角色数减一
             }
         }
@@ -134,11 +146,12 @@ function voteStage() {
 function dayOver() {
     $(".main li").removeClass("active");
     $(".day li:eq("+(stage-5)+")").addClass("active");
-    $(".footer button").text("第"+(day+1)+"天");
+    $(".footer button").text("第"+(day)+"天结束");
     $(".main ul li.active,.footer button").on("click",function () {
-        for(var n=1;n-1<sum;n++){        //结算时给死亡玩家(未确认死亡：没有死亡日期)加上死亡日期，确认死亡
-            if(getCookie("die"+n)&&getCookie("die"+n)!="prick"&&getCookie("die"+n).indexOf("#")==-1){
-                setCookie("die"+n,getCookie("die"+n)+"#"+day,3);
+        for(var n=0;n<sum;n++){        //结算时给死亡玩家(未确认死亡：没有死亡日期)加上死亡日期，确认死亡
+            if(die[n]!="false"&&die[n]!="prick"&&die[n].indexOf("#")==-1){
+                die[n] = die[n]+"#"+day;
+                setCookie("die",die.join(","),3);
                 cancelRoleStage(n);         //死亡角色数减一
             }
         }
@@ -149,15 +162,14 @@ function dayOver() {
 
 //判断是否游戏结束
 function judgeEnd(){
-    var num_bandit_alive = Number(getCookie("role3"));
-    var num_police_alive = Number(getCookie("role1"))+Number(getCookie("role2"))+Number(getCookie("role4"))+Number(getCookie("role5"));
-    alert("杀手存活人数："+num_bandit_alive+"\n"+"好人存活人数："+num_police_alive);
-    if(num_police_alive<=num_bandit_alive){
-        setCookie("settle","杀手胜利",3);
+    var num_bandit_alive = roles_alive[2];
+    var num_police_alive = roles_alive[0]+roles_alive[1]+roles_alive[3]+roles_alive[4];
+    if(num_bandit_alive==0){
+        setCookie("settle","平民胜利",3);
         window.location.href = "settle.html";
     }
-    else if(num_bandit_alive==0){
-        setCookie("settle","平民胜利",3);
+    else if(num_police_alive<=num_bandit_alive){
+        setCookie("settle","杀手胜利",3);
         window.location.href = "settle.html";
     }
     else {

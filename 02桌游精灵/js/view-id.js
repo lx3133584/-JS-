@@ -9,14 +9,17 @@ $(function () {
 
 //获取参数
 var sum = Number(getCookie("sum"));
+var roles = getCookie("roles").split(",");
 var role = ["平民","警察","杀手","医生","狙击手"];
 var id = [];
+var die = [];
 //处理参数，随机分配角色
 function dataProcessing() {
     for(var m=0;m<5;m++){
-        if(getCookie("role"+(m+1))!=0){
-            for(var n=0;n<getCookie("role"+(m+1));n++){
+        if(roles[m]!=0){
+            for(var n=0;n<roles[m];n++){
                 id.push(role[m]);
+                die.push("false");
             }
         }
     }
@@ -29,9 +32,8 @@ function dataProcessing() {
 }
 //通过cookie储存参数
 function setData() {
-    for(var i=0;i<sum;i++){
-        setCookie("num"+(i+1),id[i],3)
-    }
+    setCookie("id",id.join(","),3);
+    setCookie("die",die.join(","),3);
     setCookie("stage",0,3);
 }
 //按钮事件
