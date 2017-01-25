@@ -9,6 +9,7 @@ var flag = [];
 var time = null;
 
 btn1.addEventListener('click',function () {
+    clearTimeout(time);
     time = setInterval(
         function () {
             for(var m=0;m<9;m++){
