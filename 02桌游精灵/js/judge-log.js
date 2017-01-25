@@ -150,7 +150,6 @@ function dayOver() {
                 cancelRoleStage(n);         //死亡角色数减一
             }
         }
-        setCookie("day",(day+1),3);
         judgeEnd();
     });
 }
@@ -183,6 +182,7 @@ function judgeEnd(){
                 var time = date.getTime();
                 setCookie("time",getCookie("time")+","+time,3);
                 setCookie("stage",1,3);
+                setCookie("day",(day+1),3);
                 window.location.reload();
                 break;
         }
