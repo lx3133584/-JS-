@@ -122,11 +122,6 @@ function assignRole(sum) {
             $(".role-2").find("span").text("5");
             $(".role-3").find("span").text("5");
             break;
-        default:
-            $(".role-1").find("span").text(Math.floor(sum/3)*3+sum%3+4);
-            $(".role-2").find("span").text((sum-(sum%3+4))/2);
-            $(".role-3").find("span").text((sum-(sum%3+4))/2);
-
     }
 
 }
@@ -141,7 +136,7 @@ function customSetting() {
                 $sum += Number($(this).val());
             })
                 .end().find("span").show();
-            if($sum>5&&$sum<21){    //判断输入的数字是否符合要求
+            if($sum>5&&$(".ratio-right ul li:eq(2)").find("input").val()<$sum/2&&$(".ratio-right ul li:eq(2)").find("input").val()!=0){    //判断输入的数字是否符合要求
                 for(var i=1;i<=5;i++){
                     if(!$(".role-"+i).find("input").val()){   //判断是否输入数字
                         $(".role-"+i).find("span").text(0);  //未输入则置为0
@@ -162,7 +157,7 @@ function customSetting() {
                 flag = false;
             }
             else {  //不符合要求则弹出警告
-                alert("玩家人数在6-20之间");
+                alert("1.玩家人数在大于6\n2.杀手的数量要少于总人数的一半\n3.杀手的数量不为零");
                 $(".ratio-right ul li").find("input").val('');
                 $(".ratio-right ul").css("background","#ffffff");
                 $(".ratio-right a").html("点击设置  <i class='fa fa-cog'></i>");
