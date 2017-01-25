@@ -8,18 +8,38 @@ $(function () {
     setData();
     assignRole(6);
 });
-var sum = Number($(".num input[type='range']").val());
+var sum = Number($(".num input[type='tel']").val());
 
 //设置玩家总人数，自动分配角色
 function bindNum() {
-    $(".num input[type='text']").on("keyup",function () {
+    //手动输入
+    $(".num input[type='tel']").on("keyup",function () {
         sum = Number($(this).val());
         $(".num input[type='range']").val(sum);
         assignRole(sum);
     });
+    //调节滑块
     $(".num input[type='range']").on("change",function () {
         sum = Number($(this).val());
-        $(".num input[type='text']").val(sum);
+        $(".num input[type='tel']").val(sum);
+        assignRole(sum);
+    });
+    //点击减号
+    $(".sub").on("click",function () {
+        var sub = $(".num input[type='range']").val();
+        sub--;
+        $(".num input[type='range']").val(sub);
+        sum = Number($(".num input[type=range]").val());
+        $(".num input[type='tel']").val(sum);
+        assignRole(sum);
+    });
+    //点击加号
+    $(".add").on("click",function () {
+        var add = $(".num input[type='range']").val();
+        add++;
+        $(".num input[type='range']").val(add);
+        sum = Number($(".num input[type=range]").val());
+        $(".num input[type='tel']").val(sum);
         assignRole(sum);
     });
 }
@@ -92,6 +112,20 @@ function assignRole(sum) {
             $(".role-2").find("span").text("4");
             $(".role-3").find("span").text("4");
             break;
+        case 19:
+            $(".role-1").find("span").text("11");
+            $(".role-2").find("span").text("4");
+            $(".role-3").find("span").text("4");
+            break;
+        case 20:
+            $(".role-1").find("span").text("10");
+            $(".role-2").find("span").text("5");
+            $(".role-3").find("span").text("5");
+            break;
+        default:
+            $(".role-1").find("span").text(Math.floor(sum/3)*3+sum%3+4);
+            $(".role-2").find("span").text((sum-(sum%3+4))/2);
+            $(".role-3").find("span").text((sum-(sum%3+4))/2);
 
     }
 
@@ -99,7 +133,7 @@ function assignRole(sum) {
 // 玩家自定义分配角色
 function customSetting() {
     var flag = false;
-    $(".ratio-right ul li").find("span").after("<input type='text'>");//插入隐藏的输入框
+    $(".ratio-right ul li").find("span").after("<input type='tel'>");//插入隐藏的输入框
     $(".ratio-right a").on("click",function () {
         var $sum = 0;
         if(flag){             //判断输入框是否显示
@@ -107,7 +141,7 @@ function customSetting() {
                 $sum += Number($(this).val());
             })
                 .end().find("span").show();
-            if($sum>5&&$sum<19){    //判断输入的数字是否符合要求
+            if($sum>5&&$sum<21){    //判断输入的数字是否符合要求
                 for(var i=1;i<=5;i++){
                     if(!$(".role-"+i).find("input").val()){   //判断是否输入数字
                         $(".role-"+i).find("span").text(0);  //未输入则置为0
@@ -118,7 +152,7 @@ function customSetting() {
                 }
                 sum = $sum;                                         //改变range的值
                 $(".num input[type='range']").val(sum);
-                $(".num input[type='text']").val(sum);
+                $(".num input[type='tel']").val(sum);
                 $(".ratio-right ul").css("background","#ffffff");
                 $(".ratio-right a").html("点击设置  <i class='fa fa-cog'></i>");
                 flag = false;
@@ -128,7 +162,7 @@ function customSetting() {
                 flag = false;
             }
             else {  //不符合要求则弹出警告
-                alert("玩家人数在6-18之间");
+                alert("玩家人数在6-20之间");
                 $(".ratio-right ul li").find("input").val('');
                 $(".ratio-right ul").css("background","#ffffff");
                 $(".ratio-right a").html("点击设置  <i class='fa fa-cog'></i>");

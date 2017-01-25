@@ -149,7 +149,7 @@ a:visited{
     height: 3em;
     line-height: 3em;
 }
-.num input[type='text']{
+.num input[type='tel']{
     margin: 0 1em;
     width: 2em;
     font-size: 3.4rem;
