@@ -25,6 +25,9 @@ body{
     border-radius: 5px;
     box-shadow: #4e4e4e 4px 4px 6px;
 }
+.main>div:first-child{
+    white-space:nowrap;
+}
 .main h2{
     display: inline-block;
     height: 2em;
@@ -47,7 +50,7 @@ body{
 .main h2:first-child{
     border-radius: 6px 2px 2px 6px;
 }
-.main h2:nth-child(2){
+.main h2:last-child{
     border-radius: 2px 6px 6px 2px;
 }
 .main form input[type=text],

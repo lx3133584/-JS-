@@ -8,49 +8,51 @@ $(function () {
 /*绑定事件*/
 function bindEvent() {
     /*tab*/
-    $(".main>h2:first-child").on("click",function () {
-        $(".main>h2").removeClass();
+    $(".main h2:first-child").on("click",function () {
+        $(".main h2").removeClass();
         $(this).addClass("active");
         $(".login").show();
         $(".register").hide();
     });
-    $(".main>h2:eq(1)").on("click",function () {
-        $(".main>h2").removeClass();
+    $(".main h2:last-child").on("click",function () {
+        $(".main h2").removeClass();
         $(this).addClass("active");
         $(".login").hide();
         $(".register").show();
     });
     /*登录*/
     $(".login input[type=submit]").on("click",function () {
-        event.preventDefault();
-        if($(".login p").text()==""){
-            $.ajax({
-                type:"POST",
-                url:"login.php",
-                data:{
-                    "account":$(".login input[name=account]").val(),
-                    "password":$(".login input[name=password]").val()
-                },
-                dataType:"json",
-                success:function (data) {
-                    if(data.success){
-                        $(".main h2").hide();
-                        $(".register").hide();
-                        $(".login").hide();
-                        $(".success").show();
-                        $(".success p").text("登录成功");
-                    }
-                    else {
-                        $(".login p").text(data.message);
-                    }
-
-                },
-                error:function (XHR) {
-                    alert("发生错误:"+XHR.status)
+        $.ajax({
+            type:"POST",
+            url:"login.php",
+            beforeSend:function () {
+                if($(".login p").text()==""){
+                    return false;
                 }
-            })
-        }
+            },
+            data:{
+                "account":$(".login input[name=account]").val(),
+                "password":$(".login input[name=password]").val()
+            },
+            dataType:"json",
+            success:function (data) {
+                if(data.success){
+                    $(".main h2").hide();
+                    $(".register").hide();
+                    $(".login").hide();
+                    $(".success").show();
+                    $(".success p").text("登录成功");
+                }
+                else {
+                    $(".login p").text(data.message);
+                }
 
+            },
+            error:function (XHR) {
+                alert("发生错误:"+XHR.status)
+            }
+        });
+        return false;
     });
     /*注册*/
         /*用户名*/
@@ -105,46 +107,48 @@ function bindEvent() {
     });
         /*注册成功*/
     $(".register input[type=submit]").on("click",function () {
-        event.preventDefault();
-        $(".register input:first-child").trigger("blur");
-        $(".register input:eq(1)").trigger("blur");
-        $(".register input:eq(2)").trigger("blur");
-        if($(".register p").text()==""){
-            $.ajax({
-                type:"POST",
-                url:"register.php",
-                data:{
-                    "account":$(".register input[name=account]").val(),
-                    "password":$(".register input[name=password]").val(),
-                    "name":$(".register input[name=name]").val(),
-                    "sex":$(".register input[name=sex]").val()
-                },
-                dataType:"json",
-                success:function (data) {
-                    $(".main h2").hide();
-                    $(".register").hide();
-                    $(".login").hide();
-                    $(".success").show();
-                    if(data.success){
-                        $(".success p").text("注册成功");
-                    }
-                    else {
-                        $(".success p").text(data.message);
-                    }
-
-                },
-                error:function (XHR) {
-                    alert("发生错误:"+XHR.status)
+        // $(".register input:first-child").trigger("blur");
+        // $(".register input:eq(1)").trigger("blur");
+        // $(".register input:eq(2)").trigger("blur");
+        $.ajax({
+            type:"POST",
+            url:"register.php",
+            beforeSend:function () {
+                if($(".register p").text()!=""){
+                    return false;
                 }
-            })
-        }
+            },
+            data:{
+                "account":$(".register input[name=account]").val(),
+                "password":$(".register input[name=password]").val(),
+                "name":$(".register input[name=name]").val(),
+                "sex":$(".register input[name=sex]").val()
+            },
+            dataType:"json",
+            success:function (data) {
+                $(".main h2").hide();
+                $(".register").hide();
+                $(".login").hide();
+                $(".success").show();
+                if(data.success){
+                    $(".success p").text("注册成功");
+                }
+                else {
+                    $(".success p").text(data.message);
+                }
 
+            },
+            error:function (XHR) {
+                alert("发生错误:"+XHR.status)
+            }
+        });
+        return false;
     });
             /*返回键*/
     $(".success input[type=button]").on("click",function () {
         $(".success").hide();
         $(".main h2").show();
-        $(".main>h2:first-child").trigger("click");
+        $(".main h2:first-child").trigger("click");
     })
 
 }
