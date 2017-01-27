@@ -26,7 +26,8 @@ function bindEvent() {
             type:"POST",
             url:"login.php",
             beforeSend:function () {
-                if($(".login p").text()==""){
+                if($(".login p").text()!=""){
+                    $(".login p").text("");
                     return false;
                 }
             },
