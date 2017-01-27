@@ -19,7 +19,7 @@ if (!$con)
 //$_SERVER是一个超全局变量，在一个脚本的全部作用域中都可用，不用使用global关键字
 //$_SERVER["REQUEST_METHOD"]返回访问页面使用的请求方法
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-	echo Error METHOD
+	echo 'Error METHOD';
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST"){
 	search();
 }
@@ -33,13 +33,13 @@ function search(){
 
 	if($rows>0){
 		$row = mysql_fetch_array($query);
-		echo '{"success":true,"message":"登陆成功","name":$row['name'],"sex":$row['sex']}';
+		echo '{"success":true,"message":"登陆成功"}';
 	}
 	else{
 		echo '{"success":false,"message":"用户名或密码不正确"}';
 	}
 }
 
-
+// ,"name":"$row['name']","sex":"$row['sex']"
 
 ?>

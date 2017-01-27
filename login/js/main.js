@@ -20,20 +20,6 @@ function bindEvent() {
         $(".login").hide();
         $(".register").show();
     });
-    /*账号格式验证*/
-
-    /*密码格式验证*/
-    $(".main input:eq(1)").on("blur",function () {
-        var reg = /^[a-zA-Z]\w{5,17}$/;
-        var value = $(this).val();
-        if(reg.test(value)){
-            $(".main p:eq(1)").text("");
-        }
-        else{
-            $(".main p:eq(1)").text("密码包含字母、数字、下划线，以字母开头，6-18字节")
-        }
-
-    });
     /*登录*/
     $(".login input[type=submit]").on("click",function () {
         event.preventDefault();
@@ -120,9 +106,9 @@ function bindEvent() {
         /*注册成功*/
     $(".register input[type=submit]").on("click",function () {
         event.preventDefault();
-        $(".register input:first-child").blur();
-        $(".register input:eq(1)").blur();
-        $(".register input:eq(2)").blur();
+        $(".register input:first-child").trigger("blur");
+        $(".register input:eq(1)").trigger("blur");
+        $(".register input:eq(2)").trigger("blur");
         if($(".register p").text()==""){
             $.ajax({
                 type:"POST",
@@ -158,7 +144,7 @@ function bindEvent() {
     $(".success input[type=button]").on("click",function () {
         $(".success").hide();
         $(".main h2").show();
-        $(".main>h2:first-child").click();
+        $(".main>h2:first-child").trigger("click");
     })
 
 }
