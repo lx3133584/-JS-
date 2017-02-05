@@ -147,9 +147,10 @@ function bindEvent() {
     });
             /*返回键*/
     $(".success input[type=button]").on("click",function () {
-        $(".success").hide();
-        $(".main h2").show();
-        $(".main h2:first-child").trigger("click");
+        // $(".success").hide();
+        // $(".main h2").show();
+        // $(".main h2:first-child").trigger("click");
+        location.href = "http://www.myliangxu.cn/que/";
     })
 
 }

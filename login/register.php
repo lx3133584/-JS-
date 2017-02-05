@@ -1,8 +1,10 @@
 <?php
 
+header("content-Type: text/html; charset=Utf-8"); 
+
 $servername = "bdm259768380.my3w.com";
 $username = "bdm259768380";
-$password = "w0shilxo";
+$password = "a456456456";
 $dbname = "bdm259768380_db";
 
 // 创建连接
@@ -42,10 +44,13 @@ function create(){
 	$account = $_POST["account"];
 	$password = $_POST["password"];
 	$name = $_POST["name"];
+	$name_utf8 = my_encoding( $name, 'UTF-8');
 	$sex = $_POST["sex"];
 
+
+
 	$sql = "INSERT INTO MyGuests (account, password, name, sex)
-	VALUES ( '$account', '$password', '$name', '$sex')";
+	VALUES ( '$account', '$password', '$name_utf8', '$sex')";
 	$query=mysql_query($sql);
 
 	if ($query == TRUE) {
@@ -55,6 +60,15 @@ function create(){
 	    echo '{"success":false,"message":"Error: " . $sql . "<br>" . $conn->error}';
 	}
 
+}
+
+
+	//转码
+function my_encoding( $data, $to ){
+	$encode_arr = array('UTF-8','ASCII','GBK','GB2312','BIG5','JIS','eucjp-win','sjis-win','EUC-JP');
+	$encoded = mb_detect_encoding($data, $encode_arr);
+	$data = mb_convert_encoding($data,$to,$encoded);
+	return $data;
 }
 
 

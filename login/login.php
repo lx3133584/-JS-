@@ -2,7 +2,7 @@
 
 $servername = "bdm259768380.my3w.com";
 $username = "bdm259768380";
-$password = "w0shilxo";
+$password = "a456456456";
 $dbname = "bdm259768380_db";
 
 // 创建连接
@@ -33,6 +33,11 @@ function search(){
 
 	if($rows>0){
 		$row = mysql_fetch_array($query);
+		// 当验证通过后，启动 Session
+		session_start();
+		// 注册登陆成功的 admin 变量，并赋值 true
+		$_SESSION["admin"] = true;
+		$_SESSION['account'] = $account;
 		echo '{"success":true,"message":"登陆成功"}';
 	}
 	else{
