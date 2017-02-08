@@ -1,5 +1,7 @@
 <?php
 
+header("content-Type: text/html; charset=Utf-8"); 
+
 $servername = "bdm259768380.my3w.com";
 $username = "bdm259768380";
 $password = "a456456456";
