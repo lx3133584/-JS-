@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>IT修真院-技能树首页</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        @media(min-width:360px){
+            html{font-size:20%;}
+            .center-sm{
+                text-align: center!important;
+            }
+        }
+        @media(min-width:640px){
+            html{font-size:30%;}
+            .center-sm{
+                text-align: center!important;
+            }
+        }
+        @media(min-width:768px){
+            html{font-size:50%;}
+        }
+        @media(min-width:1024px){
+            html{font-size:62.5%;}
+        }
+        .body{
+            text-align: center;
+            background: #fafafa;
+        }
+        /*header部分*/
+        .header>.container>.row{
+            font-size: 1.4rem;
+            color: #29b078;
+            line-height: 2.85em;
+            height: 2.85em;
+        }
+        .header>.container>.row>p{
+            margin: 0;
+        }
+        .navbar-default{
+            background: #29b078;
+            margin:0;
+            border: 0;
+        }
+        .navbar-header button:hover,
+        .navbar-header button:focus{
+            background: #218d60!important;
+        }
+        .navbar-header span{
+            background: #fff!important;
+        }
+        #navList{
+            float: right;
+            text-align: center;
+        }
+        #navList>li:first-child>a{
+            border-bottom: solid 4px #fff;
+        }
+        #navList>li>a{
+            font-size: 1.6rem;
+            color: #fff;
+            height: 98px;
+            line-height: 80px;
+        }
+        #navList a:hover{
+            border-bottom: solid 4px #fff;
+        }
+        @media only screen and (max-width: 767px) {
+            #navList{
+                float: none;
+            }
+            #navList>li>a{
+                font-size: 1.6rem;
+                color: #fff;
+                height: 3em;
+                line-height: 3em;
+                padding: 0;
+            }
+            #navList>li:first-child>a{
+                border-bottom: 0;
+            }
+            #navList>li>a:hover{
+                border-bottom: none;
+                background: #32c086;
+            }
+        }
+        /*body部分*/
+        #myCarousel{
+            margin-bottom: 10rem;
+        }
+        h3{
+            margin-top: 10rem;
+            margin-bottom: 6.4rem;
+        }
+        h3,h4,h5{
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        h4{
+            margin:2em;
+        }
+        h5{
+            color: #29b078;
+            text-align: left;
+        }
+        .body p{
+            color: #999;
+            font-size: 1.6rem;
+            text-align: left;
+        }
+        img[alt="rocket"]{
+            margin-top: -10px;
+        }
+        .num_of_person{
+            padding: 4.6%;
+            border-left: 1px #dddddd dashed;
+        }
+        .num{
+            background: #fff;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+            border-radius:50%;
+            font-size: 1.8rem;
+            padding: 1.2em 1.7em 1.2em 1.7em;
+            color: #29b078;
+            box-shadow: #ddd 2px 2px 6px;
+            margin-right: 1em;
+            display: inline-block;
+        }
+        img[alt="arrow"]{
+            width: 1.5em;
+            font-size: 1.8rem;
+            margin-left: 1em;
+            display: inline-block;
+        }
+        .num+p{
+            display: inline-block;
+            font-size: 1.4rem;
+            width: 45%;
+            vertical-align: middle;
+            margin-bottom: 0;
+        }
+        .col-sm-6{
+            margin-top: 6.4rem;
+            vertical-align: middle;
+        }
+        .person{
+            background: #fff;
+            box-shadow: #ddd 0 0 5px;
+            margin-right: 3%;
+            padding: 20px;
+        }
+        .person img{
+            width: 54%;
+        }
+        .person h4{
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .person p{
+            line-height: 1.6em;
+        }
+        #myCarousel2 .carousel-indicators{
+            bottom: -50px;
+        }
+        #myCarousel2 .carousel-indicators li{
+            box-shadow: #a6a6a6 0 0 2px;
+            background: #fff;
+            border: none;
+        }
+        #myCarousel2 .carousel-indicators li[class="active"]{
+            background: #29b078;
+        }
+        .venture{
+            background: #fff;
+        }
+        .venture>div{
+            margin: 5px 0;
+        }
+        .venture>div:hover{
+            box-shadow: #ddd 0 0 20px;
+        }
+        .venture>div>img{
+            width: 100%;
+        }
+        .link li{
+            margin-top: 1em;
+        }
+        .link a{
+            text-decoration: none;
+            color: #999999;
+            font-size: 1.4rem;
+        }
+        /*footer部分*/
+        .footer{
+            background: #29b078;
+            color: #fff;
+        }
+        .footer h4{
+            font-size: 1.6rem;
+            font-weight: normal;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .footer a{
+            font-size: 1.4rem;
+            text-decoration: none;
+            color: #fff;
+        }
+        .footer ul{
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .footer li{
+            display: inline-block;
+            margin: 1em 2em 1em 0;
+        }
+        img[alt="QR_code"]{
+            width: 23%;
+            margin: 0.5em;
+        }
+        .footer .row .col-xs-4:last-child{
+            text-align: right;
+        }
+        .Copyright{
+            border-top: 1px solid #32c086;
+            text-align: center;
+        }
+        .Copyright p{
+            font-size: 1.2rem;
+            color: #fff;
+            display: inline;
+        }
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <p class="col-xs-5 hidden-xs">客服热线：010-594-78634</p>
+            <div class="col-xs-7 text-right">
+                <img src="img/weixin.png" alt="weixin">
+                <img src="img/qq.png" alt="qq">
+                <img src="img/weibo.png" alt="weibo">
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#navList">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="index.html" class="navbar-brand hidden-xs"><img src="img/logo.png" alt="logo"></a>
+            </div>
+            <ul class="nav navbar-nav collapse navbar-collapse" id="navList">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="office.html">职业</a></li>
+                <li><a href="#">推荐</a></li>
+                <li><a href="venture.html">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="body">
+    <div id="myCarousel" class="carousel slide">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="img/banner-1.jpg" alt="First slide">
+            </div>
+            <div class="item">
+                <img src="img/banner-2.jpg" alt="Second slide">
+            </div>
+            <div class="item">
+                <img src="img/banner-3.jpg" alt="Third slide">
+            </div>
+            <div class="item">
+                <img src="img/banner-4.jpg" alt="Third slide">
+            </div>
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="carousel-control left" href="#myCarousel"
+           data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="carousel-control right" href="#myCarousel"
+           data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <img src="img/rocket.png" alt="rocket">
+                <h4>高效</h4>
+                <p class="center-sm">将五到七年的成长时间，缩短到一年到三年。</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <img src="img/archive.png" alt="archive">
+                <h4>规范</h4>
+                <p class="center-sm">标准的实战教程，不会走弯路</p>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <img src="img/contacts.png" alt="contacts">
+                <h4>人脉</h4>
+                <p class="center-sm">同班好友，同院学长，技术大师，入学就混入职脉圈，为以后铺平道路。</p>
+            </div>
+            <div class="col-md-3 col-sm-6 num_of_person">
+                <h5 class="center-sm"><span class="glyphicon glyphicon-user"></span>  12400</h5>
+                <p class="center-sm">累计在线学习人数</p>
+                <h5 class="center-sm"><span class="glyphicon glyphicon-user"></span>  12400</h5>
+                <p class="center-sm">学员已经找到满意工作</p>
+            </div>
+        </div>
+        <h3>如何学习</h3>
+        <div class="row row-spacing">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="num">1</div>
+                <p>匹配你现在的个人情况，寻找适合自己的岗位</p>
+                <img src="img/arrow.png" alt="arrow"></div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="num">2</div>
+                <p>了解职业前景薪金待遇、竞争压力等</p>
+                <img src="img/arrow.png" alt="arrow"></div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="num">3</div>
+                <p>掌握行业内顶级技能</p>
+                <img src="img/arrow.png" alt="arrow"></div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="num">4</div>
+                <p>查看职业目标任务</p>
+                <img src="img/arrow.png" alt="arrow"></div>
+        </div>
+        <div class="row row-spacing">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="num">5</div>
+                <p>参考学习资源，掌握技能点，逐个完成任务</p>
+                <img src="img/arrow.png" alt="arrow"></div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="num">6</div>
+                <p>加入班级，和小伙伴们互帮互助，一块学习</p>
+                <img src="img/arrow.png" alt="arrow"></div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="num">7</div>
+                <p>选择导师，一路引导，加速自己成长</p>
+                <img src="img/arrow.png" alt="arrow"></div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="num">8</div>
+                <p>完成职业技能，升级业界大牛</p>
+                <img src="img/arrow.png" alt="arrow"></div>
+        </div>
+        <h3>优秀学员展示</h3>
+        <div class="row">
+            <div id="myCarousel2" class="carousel slide">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel2" data-slide-to="1"></li>
+                    <li data-target="#myCarousel2" data-slide-to="2"></li>
+                    <li data-target="#myCarousel2" data-slide-to="3"></li>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_1.png" alt="person_1">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_2.png" alt="person_2">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_3.png" alt="person_3">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_4.png" alt="person_4">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_1.png" alt="person_1">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_2.png" alt="person_2">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_3.png" alt="person_3">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_4.png" alt="person_4">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_1.png" alt="person_1">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_2.png" alt="person_2">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_3.png" alt="person_3">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_4.png" alt="person_4">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_1.png" alt="person_1">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_2.png" alt="person_2">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_3.png" alt="person_3">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="person">
+                            <img src="img/person_4.png" alt="person_4">
+                            <h4>技术顾问：罗大佑</h4>
+                            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发、团队管理与建设。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>战略合作企业</h3>
+        <div class="row venture">
+            <div class="col-md-1 col-sm-3"></div>
+            <div class="col-md-2 col-sm-6"><img src="img/logo_1.png" alt="logo"></div>
+            <div class="col-md-2 col-sm-6"><img src="img/logo_2.png" alt="logo"></div>
+            <div class="col-md-2 col-sm-6"><img src="img/logo_3.png" alt="logo"></div>
+            <div class="col-md-2 col-sm-6"><img src="img/logo_4.png" alt="logo"></div>
+            <div class="col-md-2 col-sm-6"><img src="img/logo_5.png" alt="logo"></div>
+        </div>
+        <h3>友情链接</h3>
+        <ul class="row link">
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">找工作</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">手机软件</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">教师招聘</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">找工作</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">手机软件</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">教师招聘</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">找工作</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">手机软件</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">教师招聘</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">找工作</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">手机软件</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">教师招聘</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">找工作</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">手机软件</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">教师招聘</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">找工作</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">手机软件</a></li>
+            <li class="col-md-1 col-sm-2 col-xs-3 text-left"><a href="#">教师招聘</a></li>
+
+        </ul>
+    </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <h4>科技树一改变你我</h4>
+                <div>
+                    <a href="#">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="#">联系我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="venture.html">合作企业</a>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <h4>旗下网站</h4>
+                <ul>
+                    <li><a href="#">草船云孵化器</a></li>
+                    <li><a href="#">最强IT训练营</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">葡萄藤轻游戏</a></li>
+                    <li><a href="#">桌游精灵</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-4">
+                <h4>微信公众平台</h4>
+                <img src="img/QR_code.png" alt="QR_code">
+            </div>
+        </div>
+        <div class="row Copyright">
+            <p>Copyright © 2015 北京葡萄藤信息技术有限公司 All Rights Reserved | 京ICP备15035574号-1</p>
+        </div>
+    </div>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
